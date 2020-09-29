@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.offcn.order.mapper.TOrderMapper">
+  <resultMap id="BaseResultMap" type="com.offcn.order.pojo.TOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="memberid" jdbcType="INTEGER" property="memberid" />
+    <result column="projectid" jdbcType="INTEGER" property="projectid" />
+    <result column="returnid" jdbcType="INTEGER" property="returnid" />
+    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="createdate" jdbcType="CHAR" property="createdate" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+    <result column="rtncount" jdbcType="INTEGER" property="rtncount" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="invoice" jdbcType="CHAR" property="invoice" />
+    <result column="invoictitle" jdbcType="VARCHAR" property="invoictitle" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, memberid, projectid, returnid, ordernum, createdate, money, rtncount, status, 
+    address, invoice, invoictitle, remark
+  </sql>
+  <select id="selectByExample" parameterType="com.offcn.order.pojo.TOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.offcn.order.pojo.TOrderExample">
+    delete from t_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.offcn.order.pojo.TOrder">
+    insert into t_order (id, memberid, projectid, 
+      returnid, ordernum, createdate, 
+      money, rtncount, status, 
+      address, invoice, invoictitle, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER}, #{projectid,jdbcType=INTEGER}, 
+      #{returnid,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR}, #{createdate,jdbcType=CHAR}, 
+      #{money,jdbcType=INTEGER}, #{rtncount,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{address,jdbcType=VARCHAR}, #{invoice,jdbcType=CHAR}, #{invoictitle,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.offcn.order.pojo.TOrder">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="projectid != null">
+        projectid,
+      </if>
+      <if test="returnid != null">
+        returnid,
+      </if>
+      <if test="ordernum != null">
+        ordernum,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="rtncount != null">
+        rtncount,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="invoice != null">
+        invoice,
+      </if>
+      <if test="invoictitle != null">
+        invoictitle,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null">
+        #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null">
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="returnid != null">
+        #{returnid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=CHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="rtncount != null">
+        #{rtncount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null">
+        #{invoice,jdbcType=CHAR},
+      </if>
+      <if test="invoictitle != null">
+        #{invoictitle,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.offcn.order.pojo.TOrderExample" resultType="java.lang.Long">
+    select count(*) from t_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_order
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberid != null">
+        memberid = #{record.memberid,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectid != null">
+        projectid = #{record.projectid,jdbcType=INTEGER},
+      </if>
+      <if test="record.returnid != null">
+        returnid = #{record.returnid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ordernum != null">
+        ordernum = #{record.ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=CHAR},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=INTEGER},
+      </if>
+      <if test="record.rtncount != null">
+        rtncount = #{record.rtncount,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoice != null">
+        invoice = #{record.invoice,jdbcType=CHAR},
+      </if>
+      <if test="record.invoictitle != null">
+        invoictitle = #{record.invoictitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_order
+    set id = #{record.id,jdbcType=INTEGER},
+      memberid = #{record.memberid,jdbcType=INTEGER},
+      projectid = #{record.projectid,jdbcType=INTEGER},
+      returnid = #{record.returnid,jdbcType=INTEGER},
+      ordernum = #{record.ordernum,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=CHAR},
+      money = #{record.money,jdbcType=INTEGER},
+      rtncount = #{record.rtncount,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      invoice = #{record.invoice,jdbcType=CHAR},
+      invoictitle = #{record.invoictitle,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.offcn.order.pojo.TOrder">
+    update t_order
+    <set>
+      <if test="memberid != null">
+        memberid = #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null">
+        projectid = #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="returnid != null">
+        returnid = #{returnid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        ordernum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=CHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="rtncount != null">
+        rtncount = #{rtncount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null">
+        invoice = #{invoice,jdbcType=CHAR},
+      </if>
+      <if test="invoictitle != null">
+        invoictitle = #{invoictitle,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.offcn.order.pojo.TOrder">
+    update t_order
+    set memberid = #{memberid,jdbcType=INTEGER},
+      projectid = #{projectid,jdbcType=INTEGER},
+      returnid = #{returnid,jdbcType=INTEGER},
+      ordernum = #{ordernum,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=CHAR},
+      money = #{money,jdbcType=INTEGER},
+      rtncount = #{rtncount,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      address = #{address,jdbcType=VARCHAR},
+      invoice = #{invoice,jdbcType=CHAR},
+      invoictitle = #{invoictitle,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

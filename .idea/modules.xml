@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/offcn_parent.iml" filepath="$PROJECT_DIR$/.idea/offcn_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scw_common/scw_common.iml" filepath="$PROJECT_DIR$/scw_common/scw_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scw_parent/scw_order/scw_order.iml" filepath="$PROJECT_DIR$/scw_parent/scw_order/scw_order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scw_parent/scw_parent.iml" filepath="$PROJECT_DIR$/scw_parent/scw_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scw_parent/scw_project/scw_project.iml" filepath="$PROJECT_DIR$/scw_parent/scw_project/scw_project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scw_register/scw_register.iml" filepath="$PROJECT_DIR$/scw_register/scw_register.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scw_parent/scw_user/scw_user.iml" filepath="$PROJECT_DIR$/scw_parent/scw_user/scw_user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scw_parent/scw_webui/scw_webui.iml" filepath="$PROJECT_DIR$/scw_parent/scw_webui/scw_webui.iml" />
+    </modules>
+  </component>
+</project>

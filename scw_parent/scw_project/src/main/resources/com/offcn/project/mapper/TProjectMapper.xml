@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.offcn.project.mapper.TProjectMapper">
+  <resultMap id="BaseResultMap" type="com.offcn.project.pojo.TProject">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="money" jdbcType="BIGINT" property="money" />
+    <result column="day" jdbcType="INTEGER" property="day" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="deploydate" jdbcType="CHAR" property="deploydate" />
+    <result column="supportmoney" jdbcType="BIGINT" property="supportmoney" />
+    <result column="supporter" jdbcType="INTEGER" property="supporter" />
+    <result column="completion" jdbcType="INTEGER" property="completion" />
+    <result column="memberid" jdbcType="INTEGER" property="memberid" />
+    <result column="createdate" jdbcType="CHAR" property="createdate" />
+    <result column="follower" jdbcType="INTEGER" property="follower" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, 
+    memberid, createdate, follower
+  </sql>
+  <select id="selectByExample" parameterType="com.offcn.project.pojo.TProjectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_project
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_project
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.offcn.project.pojo.TProjectExample">
+    delete from t_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.offcn.project.pojo.TProject">
+    insert into t_project (id, name, remark, 
+      money, day, status, deploydate, 
+      supportmoney, supporter, completion, 
+      memberid, createdate, follower
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{money,jdbcType=BIGINT}, #{day,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{deploydate,jdbcType=CHAR}, 
+      #{supportmoney,jdbcType=BIGINT}, #{supporter,jdbcType=INTEGER}, #{completion,jdbcType=INTEGER}, 
+      #{memberid,jdbcType=INTEGER}, #{createdate,jdbcType=CHAR}, #{follower,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.offcn.project.pojo.TProject">
+     <selectKey keyColumn="id" keyProperty="id"  resultType="int" order="AFTER">
+       select LAST_INSERT_ID()
+     </selectKey>
+
+    insert into t_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="day != null">
+        day,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="deploydate != null">
+        deploydate,
+      </if>
+      <if test="supportmoney != null">
+        supportmoney,
+      </if>
+      <if test="supporter != null">
+        supporter,
+      </if>
+      <if test="completion != null">
+        completion,
+      </if>
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="follower != null">
+        follower,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=BIGINT},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="deploydate != null">
+        #{deploydate,jdbcType=CHAR},
+      </if>
+      <if test="supportmoney != null">
+        #{supportmoney,jdbcType=BIGINT},
+      </if>
+      <if test="supporter != null">
+        #{supporter,jdbcType=INTEGER},
+      </if>
+      <if test="completion != null">
+        #{completion,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null">
+        #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=CHAR},
+      </if>
+      <if test="follower != null">
+        #{follower,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.offcn.project.pojo.TProjectExample" resultType="java.lang.Long">
+    select count(*) from t_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_project
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=BIGINT},
+      </if>
+      <if test="record.day != null">
+        day = #{record.day,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.deploydate != null">
+        deploydate = #{record.deploydate,jdbcType=CHAR},
+      </if>
+      <if test="record.supportmoney != null">
+        supportmoney = #{record.supportmoney,jdbcType=BIGINT},
+      </if>
+      <if test="record.supporter != null">
+        supporter = #{record.supporter,jdbcType=INTEGER},
+      </if>
+      <if test="record.completion != null">
+        completion = #{record.completion,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberid != null">
+        memberid = #{record.memberid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=CHAR},
+      </if>
+      <if test="record.follower != null">
+        follower = #{record.follower,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_project
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=BIGINT},
+      day = #{record.day,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      deploydate = #{record.deploydate,jdbcType=CHAR},
+      supportmoney = #{record.supportmoney,jdbcType=BIGINT},
+      supporter = #{record.supporter,jdbcType=INTEGER},
+      completion = #{record.completion,jdbcType=INTEGER},
+      memberid = #{record.memberid,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=CHAR},
+      follower = #{record.follower,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.offcn.project.pojo.TProject">
+    update t_project
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=BIGINT},
+      </if>
+      <if test="day != null">
+        day = #{day,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="deploydate != null">
+        deploydate = #{deploydate,jdbcType=CHAR},
+      </if>
+      <if test="supportmoney != null">
+        supportmoney = #{supportmoney,jdbcType=BIGINT},
+      </if>
+      <if test="supporter != null">
+        supporter = #{supporter,jdbcType=INTEGER},
+      </if>
+      <if test="completion != null">
+        completion = #{completion,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null">
+        memberid = #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=CHAR},
+      </if>
+      <if test="follower != null">
+        follower = #{follower,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.offcn.project.pojo.TProject">
+    update t_project
+    set name = #{name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      money = #{money,jdbcType=BIGINT},
+      day = #{day,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      deploydate = #{deploydate,jdbcType=CHAR},
+      supportmoney = #{supportmoney,jdbcType=BIGINT},
+      supporter = #{supporter,jdbcType=INTEGER},
+      completion = #{completion,jdbcType=INTEGER},
+      memberid = #{memberid,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=CHAR},
+      follower = #{follower,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

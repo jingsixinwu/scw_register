@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.offcn.project.mapper.TProjectInitiatorMapper">
+  <resultMap id="BaseResultMap" type="com.offcn.project.pojo.TProjectInitiator">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="selfintroduction" jdbcType="VARCHAR" property="selfintroduction" />
+    <result column="detailselfintroduction" jdbcType="VARCHAR" property="detailselfintroduction" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="hotline" jdbcType="VARCHAR" property="hotline" />
+    <result column="projectid" jdbcType="INTEGER" property="projectid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, selfintroduction, detailselfintroduction, telphone, hotline, projectid
+  </sql>
+  <select id="selectByExample" parameterType="com.offcn.project.pojo.TProjectInitiatorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_project_initiator
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_initiator
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_project_initiator
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.offcn.project.pojo.TProjectInitiatorExample">
+    delete from t_project_initiator
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.offcn.project.pojo.TProjectInitiator">
+    insert into t_project_initiator (id, selfintroduction, detailselfintroduction, 
+      telphone, hotline, projectid
+      )
+    values (#{id,jdbcType=INTEGER}, #{selfintroduction,jdbcType=VARCHAR}, #{detailselfintroduction,jdbcType=VARCHAR}, 
+      #{telphone,jdbcType=VARCHAR}, #{hotline,jdbcType=VARCHAR}, #{projectid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.offcn.project.pojo.TProjectInitiator">
+    insert into t_project_initiator
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="selfintroduction != null">
+        selfintroduction,
+      </if>
+      <if test="detailselfintroduction != null">
+        detailselfintroduction,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="hotline != null">
+        hotline,
+      </if>
+      <if test="projectid != null">
+        projectid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="selfintroduction != null">
+        #{selfintroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="detailselfintroduction != null">
+        #{detailselfintroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hotline != null">
+        #{hotline,jdbcType=VARCHAR},
+      </if>
+      <if test="projectid != null">
+        #{projectid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.offcn.project.pojo.TProjectInitiatorExample" resultType="java.lang.Long">
+    select count(*) from t_project_initiator
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_project_initiator
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.selfintroduction != null">
+        selfintroduction = #{record.selfintroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailselfintroduction != null">
+        detailselfintroduction = #{record.detailselfintroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telphone != null">
+        telphone = #{record.telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotline != null">
+        hotline = #{record.hotline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectid != null">
+        projectid = #{record.projectid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_project_initiator
+    set id = #{record.id,jdbcType=INTEGER},
+      selfintroduction = #{record.selfintroduction,jdbcType=VARCHAR},
+      detailselfintroduction = #{record.detailselfintroduction,jdbcType=VARCHAR},
+      telphone = #{record.telphone,jdbcType=VARCHAR},
+      hotline = #{record.hotline,jdbcType=VARCHAR},
+      projectid = #{record.projectid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.offcn.project.pojo.TProjectInitiator">
+    update t_project_initiator
+    <set>
+      <if test="selfintroduction != null">
+        selfintroduction = #{selfintroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="detailselfintroduction != null">
+        detailselfintroduction = #{detailselfintroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hotline != null">
+        hotline = #{hotline,jdbcType=VARCHAR},
+      </if>
+      <if test="projectid != null">
+        projectid = #{projectid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.offcn.project.pojo.TProjectInitiator">
+    update t_project_initiator
+    set selfintroduction = #{selfintroduction,jdbcType=VARCHAR},
+      detailselfintroduction = #{detailselfintroduction,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      hotline = #{hotline,jdbcType=VARCHAR},
+      projectid = #{projectid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

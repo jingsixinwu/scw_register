@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.offcn.order.mapper.TTransactionMapper">
+  <resultMap id="BaseResultMap" type="com.offcn.order.pojo.TTransaction">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ordersn" jdbcType="VARCHAR" property="ordersn" />
+    <result column="paysn" jdbcType="VARCHAR" property="paysn" />
+    <result column="memberid" jdbcType="INTEGER" property="memberid" />
+    <result column="amount" jdbcType="REAL" property="amount" />
+    <result column="paystate" jdbcType="TINYINT" property="paystate" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="completiontime" jdbcType="VARCHAR" property="completiontime" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="createat" jdbcType="VARCHAR" property="createat" />
+    <result column="updateat" jdbcType="VARCHAR" property="updateat" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, ordersn, paysn, memberid, amount, paystate, source, status, completiontime, note, 
+    createat, updateat
+  </sql>
+  <select id="selectByExample" parameterType="com.offcn.order.pojo.TTransactionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_transaction
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_transaction
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_transaction
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.offcn.order.pojo.TTransactionExample">
+    delete from t_transaction
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.offcn.order.pojo.TTransaction">
+    insert into t_transaction (id, ordersn, paysn, 
+      memberid, amount, paystate, 
+      source, status, completiontime, 
+      note, createat, updateat
+      )
+    values (#{id,jdbcType=INTEGER}, #{ordersn,jdbcType=VARCHAR}, #{paysn,jdbcType=VARCHAR}, 
+      #{memberid,jdbcType=INTEGER}, #{amount,jdbcType=REAL}, #{paystate,jdbcType=TINYINT}, 
+      #{source,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{completiontime,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{createat,jdbcType=VARCHAR}, #{updateat,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.offcn.order.pojo.TTransaction">
+    insert into t_transaction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ordersn != null">
+        ordersn,
+      </if>
+      <if test="paysn != null">
+        paysn,
+      </if>
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="paystate != null">
+        paystate,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="completiontime != null">
+        completiontime,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="createat != null">
+        createat,
+      </if>
+      <if test="updateat != null">
+        updateat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ordersn != null">
+        #{ordersn,jdbcType=VARCHAR},
+      </if>
+      <if test="paysn != null">
+        #{paysn,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null">
+        #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=REAL},
+      </if>
+      <if test="paystate != null">
+        #{paystate,jdbcType=TINYINT},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="completiontime != null">
+        #{completiontime,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        #{createat,jdbcType=VARCHAR},
+      </if>
+      <if test="updateat != null">
+        #{updateat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.offcn.order.pojo.TTransactionExample" resultType="java.lang.Long">
+    select count(*) from t_transaction
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_transaction
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.ordersn != null">
+        ordersn = #{record.ordersn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paysn != null">
+        paysn = #{record.paysn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberid != null">
+        memberid = #{record.memberid,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=REAL},
+      </if>
+      <if test="record.paystate != null">
+        paystate = #{record.paystate,jdbcType=TINYINT},
+      </if>
+      <if test="record.source != null">
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.completiontime != null">
+        completiontime = #{record.completiontime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createat != null">
+        createat = #{record.createat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateat != null">
+        updateat = #{record.updateat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_transaction
+    set id = #{record.id,jdbcType=INTEGER},
+      ordersn = #{record.ordersn,jdbcType=VARCHAR},
+      paysn = #{record.paysn,jdbcType=VARCHAR},
+      memberid = #{record.memberid,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=REAL},
+      paystate = #{record.paystate,jdbcType=TINYINT},
+      source = #{record.source,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      completiontime = #{record.completiontime,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      createat = #{record.createat,jdbcType=VARCHAR},
+      updateat = #{record.updateat,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.offcn.order.pojo.TTransaction">
+    update t_transaction
+    <set>
+      <if test="ordersn != null">
+        ordersn = #{ordersn,jdbcType=VARCHAR},
+      </if>
+      <if test="paysn != null">
+        paysn = #{paysn,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null">
+        memberid = #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=REAL},
+      </if>
+      <if test="paystate != null">
+        paystate = #{paystate,jdbcType=TINYINT},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="completiontime != null">
+        completiontime = #{completiontime,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        createat = #{createat,jdbcType=VARCHAR},
+      </if>
+      <if test="updateat != null">
+        updateat = #{updateat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.offcn.order.pojo.TTransaction">
+    update t_transaction
+    set ordersn = #{ordersn,jdbcType=VARCHAR},
+      paysn = #{paysn,jdbcType=VARCHAR},
+      memberid = #{memberid,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=REAL},
+      paystate = #{paystate,jdbcType=TINYINT},
+      source = #{source,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      completiontime = #{completiontime,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      createat = #{createat,jdbcType=VARCHAR},
+      updateat = #{updateat,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:fragment="cssStyle">
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+        <link rel="stylesheet" th:href="@{/css/carousel.css}">
+        <link rel="stylesheet" th:href="@{/css/theme.css}">
+    </div>
+</head>
+<body>
+    <div th:fragment="commonJs">
+        <script src="/static/jquery/jquery-2.1.1.min.js" th:src="@{/jquery/jquery-2.1.1.min.js}"></script>
+        <script src="/static/bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="/static/script/docs.min.js" th:src="@{/script/docs.min.js}"></script>
+        <script src="/static/script/back-to-top.js" th:src="@{/script/back-to-top.js}"></script>
+    </div>
+        <div class="container" id="footerBar">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div id="footer">
+                        <div class="footerNav">
+                            <a rel="nofollow" href="http://www.ujiuye.com">关于我们</a> | <a rel="nofollow" href="http://www.ujiuye.com">服务条款</a> | <a rel="nofollow" href="http://www.ujiuye.com">免责声明</a> | <a rel="nofollow" href="http://www.ujiuye.com">网站地图</a> | <a rel="nofollow" href="http://www.ujiuye.com">联系我们</a>
+                        </div>
+                        <div class="copyRight">
+                            Copyright &copy; 2014-2019 <a href="http://www.ujiuye.com">优就业IT研究院</a>.All rights reserved.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</body>
+</html>

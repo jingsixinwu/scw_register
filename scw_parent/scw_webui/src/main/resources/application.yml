@@ -1,0 +1,43 @@
+server:
+  port: 10000
+spring:
+  application:
+    name: SCW-WEBUI
+  thymeleaf:
+    prefix: classpath:/templates/   #在构建URL时预先查看名称的前缀
+    suffix: .html  #构建URL时附加到查看名称的后缀
+    cache: false #禁用模板缓存
+  redis:
+    host: 192.168.188.146
+    port: 6379
+    password: offcn123
+  session:
+    store-type: redis #session存储方式
+    timeout: 1800     #session过期时间 单位：秒
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    appname: SCW-WEBUI
+logging:
+  level:
+    com:
+      offcn: debug
+feign:
+  hystrix:
+    enabled: true  #开启Feign的熔断功能
+  client:
+    config:
+      default:
+        connectTimeout: 20000   #连接超时时间2秒
+        readTimeout: 2000     #读超时时间2秒
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 #设置熔断时间10秒
